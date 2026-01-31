@@ -1,0 +1,62 @@
+# -----------------------------------------------------
+# Terraform Destroy Workflow
+# 
+# Manually triggered workflow to tear down infrastructure
+# Use with caution!
+# -----------------------------------------------------
+
+name: "Terraform Destroy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "destroy" to confirm'
+        required: true
+        type: string
+
+env:
+  TF_LOG: INFO
+  AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+jobs:
+  destroy:
+    name: "Terraform Destroy"
+    runs-on: ubuntu-latest
+    if: github.event.inputs.confirm == 'destroy'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: |
+          terraform destroy -auto-approve \
+            -var="key_name=${{ vars.SSH_KEY_NAME || 'my-key' }}" \
+            -var="instance_name=${{ vars.INSTANCE_NAME || 'my-server' }}" \
+            -var="aws_region=${{ env.AWS_REGION }}"
+
+  reject:
+    name: "Destroy Rejected"
+    runs-on: ubuntu-latest
+    if: github.event.inputs.confirm != 'destroy'
+    steps:
+      - name: Rejection Notice
+        run: |
+          echo "Destroy was not confirmed. You must type 'destroy' to proceed."
+          exit 1

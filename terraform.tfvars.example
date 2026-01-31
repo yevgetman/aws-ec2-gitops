@@ -1,0 +1,33 @@
+# -----------------------------------------------------
+# Terraform Variables
+# 
+# Copy this file to terraform.tfvars and update values:
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# DO NOT commit terraform.tfvars to git (it's in .gitignore)
+# -----------------------------------------------------
+
+# AWS region to deploy to
+aws_region = "us-east-1"
+
+# Name of your SSH key pair in AWS
+# Create one in EC2 Console > Key Pairs if you don't have one
+key_name = "my-key"
+
+# Name for your server
+instance_name = "my-server"
+
+# Instance type (t3.micro is free tier eligible)
+instance_type = "t3.micro"
+
+# Root volume size in GB
+root_volume_size = 20
+
+# Environment tag
+environment = "dev"
+
+# SECURITY: Restrict SSH access to your IP
+# Find your IP: curl ifconfig.me
+# Format: "YOUR_IP/32" (e.g., "203.0.113.50/32")
+# Default "0.0.0.0/0" allows SSH from anywhere (not recommended for production)
+ssh_allowed_cidr = "0.0.0.0/0"
