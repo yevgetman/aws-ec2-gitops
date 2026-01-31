@@ -26,11 +26,12 @@ dnf install -y \
     git \
     vim \
     htop \
-    curl \
     wget \
     unzip \
     jq \
     tree
+# Note: curl-minimal is pre-installed on Amazon Linux 2023 and conflicts
+# with the full curl package. curl-minimal works identically for standard use.
 
 # -----------------------------------------------------
 # Install Docker (optional - uncomment if needed)
