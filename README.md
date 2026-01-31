@@ -4,7 +4,7 @@ Terraform configuration for deploying and managing an EC2 instance on AWS using 
 
 ## What This Creates
 
-- **EC2 instance** — Amazon Linux 2023, t3.micro, 20 GB encrypted gp3 root volume
+- **EC2 instance** — Amazon Linux 2023, t3.large (2 vCPU, 8 GB RAM), 20 GB encrypted gp3 root volume
 - **Elastic IP** — Static public IP attached to the instance
 - **Security group** — SSH (22), HTTP (80), HTTPS (443) inbound; all outbound
 - **S3 remote state** — Centralized Terraform state with versioning and encryption
@@ -24,7 +24,7 @@ All Terraform state is stored in S3 (`openclaw-vps-terraform-state`) with Dynamo
 
 | Resource | Identifier | Details |
 |---|---|---|
-| EC2 Instance | `i-056cb6d7d6ac1f4f8` | Amazon Linux 2023, t3.micro |
+| EC2 Instance | `i-056cb6d7d6ac1f4f8` | Amazon Linux 2023, t3.large |
 | Elastic IP | `eipalloc-0ee551a4225ca3652` | Static public IP |
 | Security Group | `sg-0c19b2b3a2683edcb` | SSH, HTTP, HTTPS in; all out |
 | S3 Bucket | `openclaw-vps-terraform-state` | Versioned, encrypted state |
@@ -243,12 +243,12 @@ Update the instance to use `data.aws_ami.ubuntu.id`. Note: Ubuntu uses `ubuntu` 
 
 | Resource | Estimate | Notes |
 |---|---|---|
-| t3.micro EC2 | ~$7-8/month | Free tier eligible for 12 months |
+| t3.large EC2 | ~$60/month | 2 vCPU, 8 GB RAM |
 | Elastic IP | Free | While attached to a running instance |
 | EBS (20 GB gp3) | ~$1.60/month | Encrypted |
 | S3 state bucket | < $0.01/month | Minimal storage |
 | DynamoDB lock table | < $0.01/month | PAY_PER_REQUEST, minimal usage |
-| **Total** | **~$8-10/month** | Free tier eligible for new AWS accounts |
+| **Total** | **~$62/month** | |
 
 ## Troubleshooting
 
