@@ -11,9 +11,17 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '*.tf'
+      - 'setup.sh'
+      - '.github/workflows/deploy.yml'
   pull_request:
     branches:
       - master
+    paths:
+      - '*.tf'
+      - 'setup.sh'
+      - '.github/workflows/deploy.yml'
 
 env:
   TF_LOG: INFO
