@@ -2,7 +2,7 @@
 # Terraform GitOps Workflow
 # 
 # - PRs: Run terraform plan and post results as comment
-# - Push to main: Run terraform apply
+# - Push to master: Run terraform apply
 # -----------------------------------------------------
 
 name: "Terraform Deploy"
@@ -10,10 +10,10 @@ name: "Terraform Deploy"
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 env:
   TF_LOG: INFO
@@ -129,11 +129,11 @@ jobs:
         run: exit 1
 
       # -----------------------------------------------------
-      # Terraform Apply (only on push to main)
+      # Terraform Apply (only on push to master)
       # -----------------------------------------------------
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform apply -auto-approve tfplan
 
       # -----------------------------------------------------
@@ -141,5 +141,5 @@ jobs:
       # -----------------------------------------------------
 
       - name: Terraform Output
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform output -json
