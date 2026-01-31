@@ -48,7 +48,7 @@ jobs:
         run: |
           terraform destroy -auto-approve \
             -var="key_name=${{ vars.SSH_KEY_NAME || 'my-key' }}" \
-            -var="instance_name=${{ vars.INSTANCE_NAME || 'my-server' }}" \
+            -var="instance_name=${{ vars.INSTANCE_NAME || 'OpenClaw VPS' }}" \
             -var="aws_region=${{ env.AWS_REGION }}"
 
   reject:

@@ -81,7 +81,7 @@ jobs:
         run: |
           terraform plan -no-color -input=false \
             -var="key_name=${{ vars.SSH_KEY_NAME || 'my-key' }}" \
-            -var="instance_name=${{ vars.INSTANCE_NAME || 'my-server' }}" \
+            -var="instance_name=${{ vars.INSTANCE_NAME || 'OpenClaw VPS' }}" \
             -var="aws_region=${{ env.AWS_REGION }}" \
             -out=tfplan
         continue-on-error: true

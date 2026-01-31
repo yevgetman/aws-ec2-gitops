@@ -20,7 +20,7 @@ variable "key_name" {
 variable "instance_name" {
   description = "Name tag for the EC2 instance"
   type        = string
-  default     = "my-server"
+  default     = "OpenClaw VPS"
 }
 
 variable "instance_type" {

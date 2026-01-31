@@ -47,7 +47,7 @@ Go to your GitHub repo → Settings → Secrets and variables → Actions
 |----------|---------|-------------|
 | `AWS_REGION` | `us-east-1` | AWS region |
 | `SSH_KEY_NAME` | `my-key` | Name of your SSH key pair |
-| `INSTANCE_NAME` | `my-server` | Name tag for the instance |
+| `INSTANCE_NAME` | `OpenClaw VPS` | Name tag for the instance |
 
 ### 3. Create AWS Resources for State (Recommended)
 

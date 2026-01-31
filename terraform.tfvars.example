@@ -15,7 +15,7 @@ aws_region = "us-east-1"
 key_name = "my-key"
 
 # Name for your server
-instance_name = "my-server"
+instance_name = "OpenClaw VPS"
 
 # Instance type (t3.micro is free tier eligible)
 instance_type = "t3.micro"
