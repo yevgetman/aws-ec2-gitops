@@ -17,8 +17,8 @@ key_name = "my-key"
 # Name for your server
 instance_name = "OpenClaw VPS"
 
-# Instance type (t3.large = 2 vCPU, 8 GB RAM)
-instance_type = "t3.large"
+# Instance type (t3.small = 2 vCPU, 2 GB RAM)
+instance_type = "t3.small"
 
 # Root volume size in GB
 root_volume_size = 20
