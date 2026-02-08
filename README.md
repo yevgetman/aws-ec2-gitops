@@ -4,7 +4,7 @@ Terraform configuration for deploying and managing an EC2 instance on AWS using 
 
 ## What This Creates
 
-- **EC2 instance** — Amazon Linux 2023, t3.small (2 vCPU, 2 GB RAM), 20 GB encrypted gp3 root volume
+- **EC2 instance** — Amazon Linux 2023, t3.small (2 vCPU, 2 GB RAM), 30 GB encrypted gp3 root volume
 - **Elastic IP** — Static public IP attached to the instance
 - **Security group** — SSH (22), HTTP (80), HTTPS (443) inbound; all outbound
 - **S3 remote state** — Centralized Terraform state with versioning and encryption
@@ -159,7 +159,7 @@ gh workflow run "Terraform Destroy" -f confirm=destroy --repo yevgetman/aws-ec2-
 | `key_name` | string | *(required)* | Pre-existing SSH key pair name in AWS |
 | `instance_name` | string | `OpenClaw VPS` | Name tag for the EC2 instance |
 | `instance_type` | string | `t3.micro` | EC2 instance size |
-| `root_volume_size` | number | `20` | Root EBS volume size in GB |
+| `root_volume_size` | number | `30` | Root EBS volume size in GB |
 | `environment` | string | `dev` | Environment tag |
 | `ssh_allowed_cidr` | string | `0.0.0.0/0` | CIDR allowed for SSH access |
 
@@ -245,10 +245,10 @@ Update the instance to use `data.aws_ami.ubuntu.id`. Note: Ubuntu uses `ubuntu` 
 |---|---|---|
 | t3.small EC2 | ~$15/month | 2 vCPU, 2 GB RAM |
 | Elastic IP | Free | While attached to a running instance |
-| EBS (20 GB gp3) | ~$1.60/month | Encrypted |
+| EBS (30 GB gp3) | ~$2.40/month | Encrypted |
 | S3 state bucket | < $0.01/month | Minimal storage |
 | DynamoDB lock table | < $0.01/month | PAY_PER_REQUEST, minimal usage |
-| **Total** | **~$17/month** | |
+| **Total** | **~$18/month** | |
 
 ## Troubleshooting
 
